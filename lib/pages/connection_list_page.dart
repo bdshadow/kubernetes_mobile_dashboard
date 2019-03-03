@@ -1,12 +1,11 @@
-import 'package:dart_kubernetes_client/client.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:kubernetes_mobile_dashboard/data/connection.dart';
 import 'package:kubernetes_mobile_dashboard/pages/new_connection_page.dart';
-import 'dart:async';
 import 'package:path_provider/path_provider.dart';
-
-import 'dart:convert';
-import 'dart:io';
 
 class ConnectionListPage extends StatefulWidget {
   ConnectionListPage({Key key, this.title}) : super(key: key);
@@ -91,8 +90,8 @@ class _ConnectionListPageState extends State<ConnectionListPage> {
               onPressed: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => NewConnectionPage())
-                );
+                    MaterialPageRoute(
+                        builder: (context) => NewConnectionPage()));
               },
             ),
           ],

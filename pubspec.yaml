@@ -16,8 +16,8 @@ dependencies:
   flutter:
     sdk: flutter
   dart_kubernetes_client:
-    git: https://github.com/bdshadow/dart-k8s
-#    path: /home/bocharov/dev/my/dart-k8s
+#    git: https://github.com/bdshadow/dart-k8s
+    path: /home/bocharov/dev/my/dart-k8s
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   path_provider: ^0.5.0+1

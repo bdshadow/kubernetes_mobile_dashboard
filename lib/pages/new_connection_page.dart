@@ -1,3 +1,4 @@
+import 'package:dart_kubernetes_client/client.dart';
 import 'package:flutter/material.dart';
 
 class NewConnectionPage extends StatefulWidget {
@@ -17,6 +18,26 @@ class _NewConnectionPageState extends State<NewConnectionPage> {
 
   AuthType authType = AuthType.token;
   bool ignoreCertificateCheck = false;
+
+  void _processConnection() {
+    _checkConnection();
+  }
+
+  void _checkConnection() {
+    DartKubernetesClient dartKubernetesClient;
+    if (authType == AuthType.token) {
+      dartKubernetesClient = DartKubernetesClient.oAuthClient(
+          _urlController.text, _tokenController.text,
+          ignoreCertificateCheck: this.ignoreCertificateCheck);
+    } else {
+      dartKubernetesClient = new DartKubernetesClient.basicClient(
+          _urlController.text,
+          _usernameController.text,
+          _passwordController.text,
+          ignoreCertificateCheck: this.ignoreCertificateCheck);
+    }
+    dartKubernetesClient.getVersion().then((value) => (print(value)));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +130,9 @@ class _NewConnectionPageState extends State<NewConnectionPage> {
                       content: Text(
                           "Use it only for trusted connection, e.g. your local running minishift"),
                       action: SnackBarAction(
-                          label: "Explain more", onPressed: () {}),
+                          //TODO add explanation page onPressed
+                          label: "Explain more",
+                          onPressed: () {}),
                     ));
                   } else {
                     Scaffold.of(context).hideCurrentSnackBar();
@@ -122,7 +145,7 @@ class _NewConnectionPageState extends State<NewConnectionPage> {
                   child: RaisedButton(
                     child: Text("Connect"),
                     onPressed: () {
-                      print("Try connect");
+                      _processConnection();
                     },
                   ),
                 ),
@@ -130,5 +153,14 @@ class _NewConnectionPageState extends State<NewConnectionPage> {
             ]),
           );
         }));
+  }
+
+  @override
+  void dispose() {
+    _urlController.dispose();
+    _tokenController.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }

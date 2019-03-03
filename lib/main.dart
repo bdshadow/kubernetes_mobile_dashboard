@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kubernetes_mobile_dashboard/pages/connection_list_page.dart';
 
-
 void main() => runApp(KubernetesAndroidDashboard());
 
 class KubernetesAndroidDashboard extends StatelessWidget {

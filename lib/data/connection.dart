@@ -11,9 +11,7 @@ class Connection {
   Connection(this.name, this.url, {this.token, this.username, this.password});
 
   factory Connection.fromJson(Map<String, dynamic> json) {
-    return Connection(
-        json["name"],
-        json["url"],
+    return Connection(json["name"], json["url"],
         token: json["token"],
         username: json["username"],
         password: json["password"]);
